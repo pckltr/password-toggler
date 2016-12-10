@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Password Toggler",
+  "short_name": "passTogg",
+  "description": "Adds buttons to show/hide password in inputs",
+  "version": "1.0",
+  "icons": {
+    "128": "icon.png"
+  },
+  "browser_action": {
+    "default_icon": "icon.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["content-script.js"]
+    }
+  ]
+}
