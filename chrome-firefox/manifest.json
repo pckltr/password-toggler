@@ -2,8 +2,8 @@
 	"manifest_version": 2,
 	"name": "Password Toggler - view typed passwords",
 	"short_name": "passTogg",
-	"description": "Adds button to show password in web pages",
-	"version": "1.1",
+	"description": "Adds button to show/hide password in input elements",
+	"version": "1.2",
 	"icons": {
 		"128": "icon.png"
 	},
