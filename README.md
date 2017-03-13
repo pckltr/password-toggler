@@ -9,6 +9,6 @@ Donate Bitcoin: 341HJspsNhG2HHAmey3DwfQPqjy4BjysN1
 
 # Distribution
 
-* [Chrome](https://addons.mozilla.org/en-US/android/addon/password-toggler/)
-* [Firefox](https://chrome.google.com/webstore/detail/password-toggler-view-typ/noeijkpjmgcnaoccgnfccfemmgbefnic)
+* [Chrome](https://chrome.google.com/webstore/detail/password-toggler-view-typ/noeijkpjmgcnaoccgnfccfemmgbefnic)
+* [Firefox](https://addons.mozilla.org/en-US/android/addon/password-toggler/)
 * [Tampermonkey/Greasemonkey](https://greasyfork.org/en/scripts/28061-password-toggler-view-input-passwords)
