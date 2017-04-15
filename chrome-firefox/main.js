@@ -27,25 +27,25 @@
         // add buttons to each password input
         for (var b = 0; b < passwordInputs.length; b++) {
             var input = passwordInputs[b];
-            var button = document.createElement("div");
+            var baseButton = document.createElement("div");
             var parent = input.parentElement;
-
-            button.setAttribute("style", "height: " + (input.offsetHeight - 8) + "px; width: " + (input.offsetHeight - 8) + "px;");
-            button.setAttribute("title", "Show password");
-
-            button.classList.add("password-toggler-button");
-            button.classList.add("password-toggler-show");
-            button.addEventListener("click", togglePasswords, false);
-
             parent.classList.add("password-toggler-button-parent");
-            parent.appendChild(button);
+            baseButton.classList.add("password-toggler-button");
+            baseButton.setAttribute("style", "height: " + (input.offsetHeight - 8) + "px; width: " + (input.offsetHeight - 8) + "px;");
 
-            button = button.cloneNode(false);
-            button.title = 'Hide password';
-            button.classList.remove("password-toggler-show");
-            button.classList.add("password-toggler-hide");
-            button.addEventListener("click", togglePasswords, false);
-            parent.appendChild(button);
+            /* add show button */
+            var showButton = baseButton.cloneNode(false);
+            showButton.title = 'Show password';
+            showButton.classList.add("password-toggler-show");
+            showButton.addEventListener("click", togglePasswords, false);
+            parent.appendChild(showButton);
+
+            /* make hide button */
+            var hideButton = baseButton.cloneNode(false);
+            hideButton.title = 'Hide password';
+            hideButton.classList.add("password-toggler-hide");
+            hideButton.addEventListener("click", togglePasswords, false);
+            parent.appendChild(hideButton);
         }
     }
 
