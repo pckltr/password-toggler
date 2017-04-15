@@ -1,0 +1,8 @@
+# keep gitkeep
+!.gitkeep
+
+# build
+/build/*
+
+# OSX DesktopService
+.DS_Store
