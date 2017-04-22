@@ -12,36 +12,77 @@
 
     // get all page inputs
     var passwordInputs,
-        buttonRepeat = setInterval(addButtons, 100);
+        loadingDone = setInterval(init, 100);
 
     /* hoisting */
-    function addButtons() {
-        passwordInputs = document.querySelectorAll('input[type=password]');
-        if (passwordInputs.length === 0) {
+    function init() {
+        if (document.readyState === 'loading') {
             return;
         }
-        // clear inverval
-        clearInterval(buttonRepeat);
+
+        clearInterval(loadingDone);
+
         document.body.classList.add('password-toggler-shown');
 
+        addButtons();
+        var observer = new MutationObserver(handleMutations);
+        observer.observe(document, {
+            attributes: true,
+            childList: true,
+            subtree: true
+        });
+    }
+
+    function handleMutations(mutations) {
+        /* somehow fix the explosive complexity */
+        addButtons();
+    }
+
+    function addButtons() {
+        var target;
+        passwordInputs = document.querySelectorAll('input[type=password]');
+
+        if (document.body.classList.contains('password-toggler-shown')) {
+            target = 'text';
+        } else {
+            target = 'password';
+        }
+
         // add buttons to each password input
-        for (var b = 0; b < passwordInputs.length; b++) {
-            var input = passwordInputs[b];
-            var baseButton = document.createElement("div");
+        for (var index = 0; index < passwordInputs.length; index++) {
+            var input = passwordInputs[index];
             var parent = input.parentElement;
+            var baseButton, showButton, hideButton;
+
+            input.type = target;
+
+            if (parent.classList.contains("password-toggler-button-parent")) {
+                /* already handled, reposition? */
+                showButton = parent.querySelectorAll('.password-toggler-show');
+                hideButton = parent.querySelectorAll('.password-toggler-hide');
+                if (showButton.length) {
+                    showButton[0].setAttribute("style", "height: " + (input.offsetHeight - 8) + "px; width: " + (input.offsetHeight - 8) + "px;");
+                }
+                if (hideButton.length) {
+                    hideButton[0].setAttribute("style", "height: " + (input.offsetHeight - 8) + "px; width: " + (input.offsetHeight - 8) + "px;");
+                }
+                continue;
+            }
             parent.classList.add("password-toggler-button-parent");
+
+            baseButton = document.createElement("div");
             baseButton.classList.add("password-toggler-button");
             baseButton.setAttribute("style", "height: " + (input.offsetHeight - 8) + "px; width: " + (input.offsetHeight - 8) + "px;");
 
             /* add show button */
-            var showButton = baseButton.cloneNode(false);
+            showButton = baseButton.cloneNode(false);
             showButton.title = 'Show password';
             showButton.classList.add("password-toggler-show");
             showButton.addEventListener("click", togglePasswords, false);
             parent.appendChild(showButton);
 
             /* make hide button */
-            var hideButton = baseButton.cloneNode(false);
+            hideButton = baseButton.cloneNode(false);
             hideButton.title = 'Hide password';
             hideButton.classList.add("password-toggler-hide");
             hideButton.addEventListener("click", togglePasswords, false);
